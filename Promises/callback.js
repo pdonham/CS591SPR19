@@ -1,18 +1,22 @@
+//Callbacks are the most-often used approach to manage
+//asynchronous calls, but they introduce new problems,
+//especially inversion of control
+
 
 const delay = (seconds, callback) => {
     setTimeout(
         () => {
             console.log(`Done after ${seconds}`);
-            callback();
+            callback(42);
         },
         seconds);
 };
 
 const getNumber = () => {
     delay(5000,
-        () =>  { return 42; }
+        (value) =>  { console.log(`In callback, got ${value}`); }
         )
 }
 
-console.log(getNumber());
-
+getNumber();
+console.log('Done');
